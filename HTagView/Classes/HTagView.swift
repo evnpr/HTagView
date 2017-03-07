@@ -254,13 +254,49 @@ open class HTagView: UIView, HTagDelegate {
         }else{
             var x = marg
             var y = marg
+            var numberOfLines = 0
+            var widthOfLines = [Int: CGFloat]()
+            var a = marg
+            var b = marg
             for index in 0..<tags.count{
-                if tags[index].frame.width + x > frame.width - marg{
-                    y += tags[index].frame.height + btwLines
-                    x = marg
+                if tags[index].frame.width + a > frame.width - marg{
+                    b += tags[index].frame.height + btwLines
+                    a = marg
+                    numberOfLines = numberOfLines + 1
                 }
+                a += tags[index].frame.width + btwTags
+                widthOfLines[numberOfLines] = 0
+            }
+            numberOfLines = 0
+            a = marg
+            b = marg
+            for index in 0..<tags.count{
+                if tags[index].frame.width + a > frame.width - marg{
+                    widthOfLines[numberOfLines] = widthOfLines[numberOfLines]! - tags[index-1].frame.width - btwTags
+                    b += tags[index].frame.height + btwLines
+                    a = marg
+                    numberOfLines = numberOfLines + 1
+                }
+                widthOfLines[numberOfLines] = widthOfLines[numberOfLines]! + a + tags[index].frame.width + btwTags
+                a += tags[index].frame.width + btwTags
+            }
+            numberOfLines = 0
+            x = (self.frame.width - (widthOfLines[numberOfLines]!) - marg) / 2
+            a = marg
+            for index in 0..<tags.count{
+                if tags[index].frame.width + a > frame.width - marg{
+                    y += tags[index].frame.height + btwLines
+                    a = marg
+                    x = (self.frame.width - (widthOfLines[numberOfLines]!) - marg) / 2
+                    numberOfLines = numberOfLines + 1
+                }
+                print("width frame ", self.frame.width)
+                print("LINE ", numberOfLines)
+                print("width of Line", widthOfLines[numberOfLines])
+                print("X ", x)
                 tags[index].frame.origin = CGPoint(x: x, y: y)
                 x += tags[index].frame.width + btwTags
+                a += tags[index].frame.width + btwTags
             }
             self.frame.size = CGSize(width: self.frame.width, height: y + (tags.last?.frame.height ?? 0) + marg )
         }
