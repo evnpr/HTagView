@@ -280,7 +280,7 @@ open class HTagView: UIView, HTagDelegate {
                 a += tags[index].frame.width + btwTags
             }
             numberOfLines = 0
-            x = (self.frame.width - (widthOfLines[numberOfLines]!)) / 2 + marg
+            x = (self.frame.width - (widthOfLines[numberOfLines]! - marg)) / 2
             a = marg
             for index in 0..<tags.count{
                 print("width frame index", tags[index].frame.width)
@@ -288,7 +288,7 @@ open class HTagView: UIView, HTagDelegate {
                     y += tags[index].frame.height + btwLines
                     a = marg
                     numberOfLines = numberOfLines + 1
-                    x = (self.frame.width - (widthOfLines[numberOfLines]!)) / 2 + marg
+                    x = (self.frame.width - (widthOfLines[numberOfLines]! - marg)) / 2
                 }
                 print("width frame ", self.frame.width)
                 print("LINE ", numberOfLines)
