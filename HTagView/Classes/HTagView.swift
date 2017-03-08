@@ -272,23 +272,23 @@ open class HTagView: UIView, HTagDelegate {
             b = marg
             for index in 0..<tags.count{
                 if tags[index].frame.width + a > frame.width - marg{
-                    widthOfLines[numberOfLines] = widthOfLines[numberOfLines]! - tags[index-1].frame.width - btwTags
                     b += tags[index].frame.height + btwLines
                     a = marg
                     numberOfLines = numberOfLines + 1
                 }
-                widthOfLines[numberOfLines] = widthOfLines[numberOfLines]! + a + tags[index].frame.width + btwTags
+                widthOfLines[numberOfLines] = widthOfLines[numberOfLines]! + tags[index].frame.width + btwTags
                 a += tags[index].frame.width + btwTags
             }
             numberOfLines = 0
-            x = (self.frame.width - (widthOfLines[numberOfLines]!) - marg) / 2
+            x = (self.frame.width - (widthOfLines[numberOfLines]!)) / 2 + marg
             a = marg
             for index in 0..<tags.count{
+                print("width frame index", tags[index].frame.width)
                 if tags[index].frame.width + a > frame.width - marg{
                     y += tags[index].frame.height + btwLines
                     a = marg
-                    x = (self.frame.width - (widthOfLines[numberOfLines]!) - marg) / 2
                     numberOfLines = numberOfLines + 1
+                    x = (self.frame.width - (widthOfLines[numberOfLines]!)) / 2 + marg
                 }
                 print("width frame ", self.frame.width)
                 print("LINE ", numberOfLines)
