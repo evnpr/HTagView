@@ -140,7 +140,7 @@ open class HTagView: UIView, HTagDelegate {
     open var tagCornerRadiusToHeightRatio :CGFloat = CGFloat(0.2){
         didSet{
             for tag in tags{
-                tag.layer.cornerRadius = tag.frame.height * tagCornerRadiusToHeightRatio
+                tag.layer.cornerRadius = tag.frame.height * tagCornerRadiusToHeightRatio + 10
             }
             layoutIfNeeded()
         }
@@ -231,7 +231,7 @@ open class HTagView: UIView, HTagDelegate {
             tag.titleLabel?.font = tag.titleLabel?.font.withSize(fontSize)
             tag.setBackColors(tagMainBackColor, secondColor: tagSecondBackColor)
             tag.setTextColors(tagMainTextColor, secondColor: tagSecondTextColor)
-            tag.layer.cornerRadius = tag.frame.height * tagCornerRadiusToHeightRatio
+            tag.layer.cornerRadius = tag.frame.height * tagCornerRadiusToHeightRatio + 10
             tag.layer.borderColor = tagBorderColor
             tag.layer.borderWidth = tagBorderWidth
             tag.tagString = dataSource.tagView(self, titleOfTagAtIndex: index)
